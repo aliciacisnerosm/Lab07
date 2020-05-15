@@ -3,16 +3,17 @@ const uuid = require('uuid');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const morgan = require('morgan');
-const apiKey = '2abbf7c3-245b-404f-9473-ade729ed4653';
+const { DATABASE_URL, PORT, TOKEN } = require('./config');
 const { Bookmarks } = require('./models/bookmarkModel.js');
 const mongoose = require('mongoose');
-const { DATABASE_URL, PORT } = require('./config');
+const cors = require('./middleware/cors');
+const apiKey = TOKEN;
 
 const app = express();
+app.use(cors);
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(middleware);
-
 function middleware(req, res, next) {
   let authorization = req.headers.authorization;
   let bookapikey = req.headers['book-api-key'];
