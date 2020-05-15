@@ -6,8 +6,10 @@ const morgan = require('morgan');
 const apiKey = '2abbf7c3-245b-404f-9473-ade729ed4653';
 const { Bookmarks } = require('./models/bookmarkModel.js');
 const mongoose = require('mongoose');
+const { DATABASE_URL, PORT } = require('./config');
 
 const app = express();
+app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(middleware);
 
@@ -42,10 +44,10 @@ function middleware(req, res, next) {
 app.get('/bookmarks', (req, res) => {
   console.log('Getting all bookmarks');
   Bookmarks.getAllBookmarks()
-    .then(result => {
+    .then((result) => {
       return res.status(200).json(result);
     })
-    .catch(err => {
+    .catch((err) => {
       res.statusMessage =
         'Something is wrong with the Database. Try again later.';
       return res.status(500).end();
@@ -63,14 +65,14 @@ app.get('/bookmark', (req, res) => {
   }
 
   Bookmarks.getBookmark(title)
-    .then(result => {
+    .then((result) => {
       if (result.length == 0) {
         res.statusMessage = 'Title not found';
         return res.status(404).end();
       }
       return res.status(200).json(result);
     })
-    .catch(err => {
+    .catch((err) => {
       res.statusMessage =
         'Something is wrong with the Database. Try again later.' + err.message;
       return res.status(500).end();
@@ -112,14 +114,14 @@ app.post('/bookmarks', jsonParser, (req, res) => {
     title: title,
     description: description,
     url: url,
-    rating: rating
+    rating: rating,
   };
 
   Bookmarks.createBookmark(newBookmark)
-    .then(result => {
+    .then((result) => {
       return res.status(201).json(result);
     })
-    .catch(err => {
+    .catch((err) => {
       res.statusMessage =
         'Something is wrong with the Database - Try again later! ' +
         err.message;
@@ -131,7 +133,7 @@ app.delete('/bookmark/:id', (req, res) => {
   let id = req.params.id;
 
   Bookmarks.deleteBookmark(id)
-    .then(result => {
+    .then((result) => {
       if (result.deletedCount == 0) {
         res.statusMessage = 'The id was not found in the bookmarks list';
         return res.status(404).end();
@@ -139,7 +141,7 @@ app.delete('/bookmark/:id', (req, res) => {
         return res.status(200).end();
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.statusMessage = 'Something wrong with the Database';
       return res.status(500).end();
     });
@@ -177,27 +179,27 @@ app.patch('/bookmark/:id', jsonParser, (req, res) => {
   }
 
   Bookmarks.updateBookmark(id, params)
-    .then(result => {
+    .then((result) => {
       if (!result) {
         res.statusMessage = 'That id was not found in the bookmarks list';
         return res.status(404).end();
       }
       return res.status(202).json(result);
     })
-    .catch(err => {
+    .catch((err) => {
       res.statusMessage = 'Something wrong with the Database';
       return res.status(500).end();
     });
 });
 
-app.listen(8080, () => {
+app.listen(PORT, () => {
   new Promise((resolve, reject) => {
     const settings = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
     };
-    mongoose.connect('mongodb://localhost/bookmarksdb', settings, err => {
+    mongoose.connect(DATABASE_URL, settings, (err) => {
       if (err) {
         return reject(err);
       } else {
@@ -205,7 +207,7 @@ app.listen(8080, () => {
         return resolve();
       }
     });
-  }).catch(err => {
+  }).catch((err) => {
     console.log(err);
   });
 });

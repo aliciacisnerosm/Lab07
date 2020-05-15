@@ -1,0 +1,42 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+button {
+  width: 100px;
+  background-color: #C0B9DD;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#title-bookmarks{
+  font-size: 30px;
+  margin-right: auto;
+  margin-left: auto; 
+  width: 100%;
+  text-align: center;
+}
+
+.bookmark-style{
+  border: 1px solid black;
+  margin: 10px;
+  padding: 2%;
+  width: 400px;
+}
+
+#allBookmarks{
+  display: flex;
+  flex-wrap: wrap;
+}
+input {
+  width: 10%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}

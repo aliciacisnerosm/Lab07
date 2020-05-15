@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Bookmarks</title>
+  <link href="./css/index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1 id="title-bookmarks">Bookmarks</h1>
+  <h1>Results</h1>
+
+  <div id="allBookmarks"></div>
+  <h1>GET BY TITLE</h1>
+
+  <form class="form-get-title-bookmarks">
+    <label for="bookmarks-title"> Title: </label>
+    <input type="text" id="bookmarks-title" />
+    <button type="submit" id="get-bookmarks">
+      Retrieve bookmark
+    </button>
+  </form>
+  <div id="get-by-title"></div>
+
+  <h1>POST</h1>
+
+  <form class="form-post-bookmarks">
+    <label for="bookmarksTitle">
+      Title:
+    </label>
+    <input type="text" id="bookmarksTitle" />
+
+    <label for="bookmarksDescription">
+      Description:
+    </label>
+    <input type="text" id="bookmarksDescription" />
+
+    <label for="bookmarksrRating">
+      Rating:
+    </label>
+    <input type="number" id="bookmarksrRating" />
+
+    <label for="bookmarksUrl">
+      Url:
+    </label>
+    <input type="text" id="bookmarksUrl" />
+    <button type="submit" id="post-bookmarks">
+      Post bookmark
+    </button>
+  </form>
+  <div id="post-result"></div>
+  <h1>DELETE</h1>
+
+  <form class="form-delete-bookmarks">
+    <label for="delete-id"> ID: </label>
+    <input type="text" id="delete-id" />
+    <button type="submit" id="delete-bookmarks">
+      Delete bookmark
+    </button>
+  </form>
+  <div id="delete-div"></div>
+  <h1>PATCH</h1>
+  <form class="form-patch-bookmarks">
+    <label for="patch-id">
+      ID:
+    </label>
+    <input type="text" id="patch-id" />
+    <label for="patch-title">
+      Title:
+    </label>
+    <input type="text" id="patch-title" />
+
+    <label for="patch-description">
+      Description:
+    </label>
+    <input type="text" id="patch-description" />
+
+    <label for="patch-rating">
+      Rating:
+    </label>
+    <input type="number" id="patch-rating" />
+
+    <label for="patch-url">
+      Url:
+    </label>
+    <input type="text" id="patch-url" />
+    <button type="submit" id="patch-bookmarks">
+      Patch bookmark
+    </button>
+  </form>
+  <div id="patch-result"></div>
+
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
